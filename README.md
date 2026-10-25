@@ -60,6 +60,10 @@ DNS Options
 ☑ Enable DNS resolution
 ```
 
+> [!NOTE]
+> **Consideración de Arquitectura (Producción vs. Lab):**
+> En este laboratorio se utiliza un único NAT Gateway en la Availability Zone A para optimizar costes. Sin embargo, en un entorno de producción con alta disponibilidad estricta, la mejor práctica de AWS es desplegar **un NAT Gateway por cada Zona de Disponibilidad** (Zona A y Zona B). De este modo, si la Zona A sufriera una caída completa, las instancias de la Zona B no perderían conectividad a internet para actualizaciones y descargas.
+
 ## SG (Security Group)
 
 ### SG for EC2
@@ -355,11 +359,11 @@ set -euo pipefail
 
 AWS_REGION="us-east-1"
 
-EFS_DNS="AÑADE AQUÍ EL DNS name del EFS"
+EFS_DNS="<AÑADE AQUÍ EL DNS name del EFS>"
 EFS_MOUNT="/mnt/odoo-data"
 APP_DIR="/home/ec2-user/odoo-pilot"
 
-DB_HOST="AÑADE AQUÍ EL ENDPOINT DE LA BD"
+DB_HOST="<AÑADE AQUÍ EL ENDPOINT DE LA BD>"
 DB_PORT="5432"
 DB_NAME="odoo"
 
@@ -635,13 +639,13 @@ Success codes: 200-399
 
 ---
 
-[!CAUTION]
-Es posible que a lo que se nos creen las instancias del ASG, si vamos a Targets dentro de Target Group, no nos aparezcan registradas las dos máquinas que acaban de crearse. Para ello, debemos registrarlas manualmente.
+> [!CAUTION]
+> Es posible que a lo que se nos creen las instancias del ASG, si vamos a Targets dentro de Target Group, no nos aparezcan registradas las dos máquinas que acaban de crearse. Para ello, debemos registrarlas manualmente.
 
 ---
 
-[!IMPORTANT]
-Copiando el DNS name del Load Balancer que hemos creado en el navegador, veremos el ERP de Odoo.
+> [!IMPORTANT]
+> Copiando el DNS name del Load Balancer que hemos creado en el navegador, veremos el ERP de Odoo.
 
 ---
 
